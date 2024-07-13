@@ -1,80 +1,54 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('adminlte::page')
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+@section('content')
+    <div id="dynamic-content">
+        @yield('content_body')
     </div>
-</body>
-</html>
+@stop
+
+<!-- resources/views/welcome.blade.php -->
+@push('js')
+<script>
+$(document).ready(function() {
+    $('a.ajax-link').click(function(e) {
+        e.preventDefault(); // Prevent the default link behavior
+        var url = $(this).attr('href'); // Get the URL from the 
+        
+
+        // Remove the active-link class from all links
+        $('a.ajax-link').removeClass('active');
+        $('a.ajax-link-pat').removeClass('active');
+
+        // Add the active-link class to the clicked link
+        $(this).addClass('active');
+
+          // Update the URL in the address bar without reloading the page
+          history.pushState(null, '', url);
+
+        $.get(url, function(data) {
+            $('#dynamic-content').html($(data).find('#dynamic-content').html());
+        });
+        // Remove class of submenu display        
+        $('.has-treeview').removeClass('menu-open menu-is-opening');
+        $('.nav-treeview').css('display','none');
+
+    });
+
+    $('a.ajax-link-pat').click(function(e) {
+        e.preventDefault(); // Prevent the default link behavior
+        var url = $(this).attr('href'); // Get the URL from the 
+        // Remove the active-link class from all links
+        $('a.ajax-link-pat').removeClass('active');
+
+        // Add the active-link class to the clicked link
+        $(this).addClass('active');
+
+          // Update the URL in the address bar without reloading the page
+          history.pushState(null, '', url);
+
+          $('a.ajax-link').blur();        
+    });
+
+});
+</script>
+@endpush

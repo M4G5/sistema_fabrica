@@ -14,8 +14,8 @@ return [
     |
     */
 
-    'title' => 'Muebleria',
-    'title_prefix' => '',
+    'title' => '',
+    'title_prefix' => 'Muebleria - ',
     'title_postfix' => '',
 
     /*
@@ -197,7 +197,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-danger elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -326,21 +326,24 @@ return [
         ],
         [
             'text' => 'Dashboard',
-            'url' => 'admin/pages',
+            'route' => 'home',
             'icon' => 'fas fa-fw fa-tachometer-alt',
             'label' => 4,
             'label_color' => 'success',
+            'classes' => 'ajax-link',
         ],
         ['header' => 'RECURSOS HUMANOS'],
         ['header' => 'PRODUCCION'],
         [
             'text' => 'MUEBLES',
             'icon' => 'fa fa-fw fa-tablets',
+            'classes' => 'ajax-link',
             'submenu' => [
                 [
                     'text' => 'Destajo',
-                    'url' => '#',
+                    'route' => 'destajo',
                     'icon' => 'fa fa-fw fa-percent',
+                    'classes' => 'ajax-link-pat',
                 ],
                 [
                     'text' => 'Reporte simple',
@@ -403,7 +406,8 @@ return [
         [
             'text' => 'information',
             'icon_color' => 'cyan',
-            'url' => '#',
+            'route' => 'test',
+            'classes' => 'ajax-link',
         ],
     ],
 

@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Muebleria',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,8 +63,8 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>Admin</b>', //<b>Admin</b>LTE
+    'logo_img' => 'vendor/adminlte/dist/img/login.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/logo.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -113,7 +113,7 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/logoma.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
@@ -134,11 +134,12 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
-    'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
+    'usermenu_header' => true,
+    'usermenu_header_class' => 'bg-olive',
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
     'usermenu_profile_url' => false,
+
 
     /*
     |--------------------------------------------------------------------------
@@ -154,7 +155,7 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
+    'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
@@ -244,6 +245,7 @@ return [
     'right_sidebar_scrollbar_theme' => 'os-theme-light',
     'right_sidebar_scrollbar_auto_hide' => 'l',
 
+
     /*
     |--------------------------------------------------------------------------
     | URLs
@@ -295,15 +297,21 @@ return [
 
     'menu' => [
         // Navbar items:
-        [
+        /* [
             'type' => 'navbar-search',
             'text' => 'search',
             'topnav_right' => true,
-        ],
+        ], */
         [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
+        /* [
+            'text' => '',
+            'url' => '#',
+            'icon' => 'far fa-fw fa-comment',
+            'topnav_right' => true,
+        ], */
 
         // Sidebar items:
         [
@@ -314,62 +322,72 @@ return [
             'text' => 'blog',
             'url' => 'admin/blog',
             'can' => 'manage-blog',
+            // 'topnav_right' => ''
         ],
         [
-            'text' => 'pages',
+            'text' => 'Dashboard',
             'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-tachometer-alt',
             'label' => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'RECURSOS HUMANOS'],
+        ['header' => 'PRODUCCION'],
+        [
+            'text' => 'MUEBLES',
+            'icon' => 'fa fa-fw fa-tablets',
+            'submenu' => [
+                [
+                    'text' => 'Destajo',
+                    'url' => '#',
+                    'icon' => 'fa fa-fw fa-percent',
+                ],
+                [
+                    'text' => 'Reporte simple',
+                    'url' => '#',
+                    'icon' => 'far fa-fw fa-file-excel',
+                ],
+                [
+                    'text' => 'Reporte completo',
+                    'url' => '#',
+                    'icon' => 'far fa-fw fa-file-excel',
+                ],
+                [
+                    'text' => 'Areas',
+                    'url' => '#',
+                    'icon' => 'far fa-fw fa-building',
+                ],
+            ],
+        ],
+        [
+            'text' => 'SALAS',
+            'icon' => 'fa fa-fw fa-couch',
+            'submenu' => [
+                [
+                    'text' => 'Destajo',
+                    'url' => '#',
+                    'icon' => 'fa fa-fw fa-money-bill',
+                ],
+                [
+                    'text' => 'Areas',
+                    'url' => '#',
+                    'icon' => 'far fa-fw fa-building',
+                ],
+            ],
+        ],
+
+        // ['header' => 'account_settings'],
         [
             'text' => 'profile',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
+            'topnav_user' => true,
         ],
         [
             'text' => 'change_password',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
+            'topnav_user' => true,
         ],
         ['header' => 'labels'],
         [
